@@ -201,6 +201,7 @@ M.start_presentation = function(opts)
             -- When leaving body also close header
             foreach_float(function(_, float)
                 pcall(vim.api.nvim_win_close, float.win, true)
+                pcall(vim.api.nvim_buf_delete, float.buf, { force = true })
             end)
         end
     })
@@ -224,6 +225,8 @@ M.start_presentation = function(opts)
     set_slide_content(state.current_slide)
 end
 
-M.start_presentation({ bufnr = 36 })
+-- M.start_presentation({ bufnr = 3 })
+
+M._parse_slides = parse_slides
 
 return M
